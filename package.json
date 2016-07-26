@@ -1,0 +1,33 @@
+{
+  "name": "gulp-html-version",
+  "version": "1.0.0",
+  "description": "Gulp plugin to append version from package.json",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MinJieLiu/gulp-html-version.git"
+  },
+  "keywords": [
+    "gulp-html-version",
+    "version",
+    "gulp",
+    "gulpplugin"
+  ],
+  "author": "LMY",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/MinJieLiu/gulp-html-version/issues"
+  },
+  "homepage": "https://github.com/MinJieLiu/gulp-html-version#readme",
+  "dependencies": {
+    "gulp-util": "^3.0.7",
+    "object-assign": "^4.1.0",
+    "through2": "^2.0.1"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1"
+  }
+}
