@@ -4,7 +4,7 @@ gulpHtmlVersion = require('../index');
 gulp.task('default', function() {
     return gulp.src('./example.html')
         .pipe(gulpHtmlVersion({
-            paramType: 'timestamp'
+            paramType: 'guid'
         }))
         .pipe(gulp.dest('./build/'));
 });

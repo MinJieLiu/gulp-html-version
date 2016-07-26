@@ -28,7 +28,7 @@ var ShortId = function() {
         }
         lastTime = thisTime;
         return thisTime.toString(16);
-    }
+    };
 };
 
 function gulpHtmlVersion(options) {
@@ -36,13 +36,17 @@ function gulpHtmlVersion(options) {
     // 合并参数
     var opts = assign(defaults, options);
 
-    // 获取需要拼接的参数
-    if (opts.paramType === 'version') {
-        opts.version = pkg.version;
-    } else if (opts.paramType === 'guid') {
-        opts.version = new ShortId().next();
-    } else if (opts.paramType === 'timestamp') {
-        opts.version = Date.now();
+    // 选择参数类型
+    switch (opts.paramType) {
+        case 'version':
+            opts.version = pkg.version;
+            break;
+        case 'guid':
+            opts.version = new ShortId().next();
+            break;
+        case 'timestamp':
+            opts.version = Date.now();
+            break;
     }
 
     // 创建一个让每个文件通过的 stream 通道
