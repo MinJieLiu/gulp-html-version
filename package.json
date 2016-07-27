@@ -1,6 +1,6 @@
 {
   "name": "gulp-html-version",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "description": "Gulp plugin to append version from package.json",
   "main": "index.js",
   "scripts": {

@@ -3,10 +3,6 @@ gulpHtmlVersion = require('../index');
 
 gulp.task('default', function() {
     return gulp.src('./*.html')
-        .pipe(gulpHtmlVersion({
-            paramName: 'version',
-            suffix: ['css', 'js', 'png'],
-            paramType: 'version'
-        }))
+        .pipe(gulpHtmlVersion())
         .pipe(gulp.dest('./build/'));
 });
