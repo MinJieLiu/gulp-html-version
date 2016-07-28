@@ -2,7 +2,7 @@
 var through = require('through2');
 var assign = require('object-assign');
 var gutil = require('gulp-util');
-var pkg = require(__dirname + '/package.json');
+var pkg = require(process.cwd() + '/package.json');
 
 // plugin name
 const PLUGIN_NAME = 'gulp-html-version';
