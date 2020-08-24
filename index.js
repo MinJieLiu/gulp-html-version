@@ -12,6 +12,7 @@ var defaults = {
   paramName: 'v',
   paramType: 'version',
   suffix: ['css', 'js'],
+  mode:'replace' // 'replace: replace version from the old version; append: append version information after the old version using &' 
 };
 
 /**
@@ -50,7 +51,9 @@ function gulpHtmlVersion(options) {
       break;
   }
 
-  var regex = new RegExp('(\\s[\\w-]+=".+)(\\.' + opts.suffix.join('|') + ')(\\?[^&"]+(?:&[^&"]+)*)?(")', 'ig');
+  var regex = new RegExp('(\\s[\\w-]+=".+)(\\.' + opts.suffix.join('|') + ')(\\?[^&"\']+(?:&[^&"\']+)*)?(")', 'ig');
+  // 单引号 fix:if user use single quotes for quote js css file,only use regex above may cause wrong regex
+  var regex2 = new RegExp('(\\s[\\w-]+=\'.+)(\\.' + opts.suffix.join('|') + ')(\\?[^&"\']+(?:&[^&"\']+)*)?(\')', 'ig');
 
   var stream = through.obj(function (file, enc, cb) {
 
@@ -70,7 +73,29 @@ function gulpHtmlVersion(options) {
       var version;
       // append parameter
       if ($3 != undefined) {
-        version = $3 + '&' + opts.paramName + '=' + opts.version;
+        if(opts.mode == 'replace'){
+            // replace version
+          version = '?' + opts.paramName + '=' + opts.version;
+        } else {
+          // append version
+          version = $3 + '&' + opts.paramName + '=' + opts.version;
+        }
+      } else {
+        version = '?' + opts.paramName + '=' + opts.version;
+      }
+      return $1 + $2 + version + $4;
+    });
+    // 单引号处理
+    contents = contents.replace(regex2, function (match, $1, $2, $3, $4) {
+      var version;
+      if ($3 != undefined) {
+        if(opts.mode == 'replace'){
+            // replace version
+          version = '?' + opts.paramName + '=' + opts.version;
+        } else {
+          // append version
+          version = $3 + '&' + opts.paramName + '=' + opts.version;
+        } 
       } else {
         version = '?' + opts.paramName + '=' + opts.version;
       }
